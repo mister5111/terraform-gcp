@@ -22,6 +22,8 @@ jobs:
           cd GCP/main/
           terraform init
           terraform validate
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
       - name: Terraform Plan
         run: terraform plan
