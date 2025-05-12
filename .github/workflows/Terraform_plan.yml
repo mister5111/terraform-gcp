@@ -3,13 +3,15 @@ name: Terraform-plan
 on: 
   workflow_dispatch:
 
-env:
-  work_dir: "GCP/main/"
+# env:
+#   work_dir: "GCP/main/"
 
 jobs:
   terraform:
     name: Terraform Workflow
     runs-on: ubuntu-latest
+    env:
+      WORK_DIR: ./GCP/main/
 
     steps:
       - name: Checkout repository
