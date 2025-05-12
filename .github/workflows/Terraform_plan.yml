@@ -3,6 +3,9 @@ name: Terraform-plan
 on: 
   workflow_dispatch:
 
+env:
+  work_dir: "GCP/main/"
+
 jobs:
   terraform:
     name: Terraform Workflow
@@ -18,16 +21,16 @@ jobs:
         #   terraform_version: 1.6.6
 
       - name: Terraform Init
+        working-directory: "${work_dir}"
         run: |
-          cd GCP/main/
           terraform init
           terraform validate
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
       - name: Terraform Plan
+        working-directory: "${work_dir}"
         run: |
-          cd GCP/main/
           terraform plan
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
