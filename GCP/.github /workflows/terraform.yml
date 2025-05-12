@@ -1,0 +1,38 @@
+name: Terraform
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  terraform:
+    name: Terraform Workflow
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        # with:
+        #   terraform_version: 1.6.6
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Format Check
+        run: terraform fmt -check
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+
+      # Раскомментируй если хочешь автоматически применять:
+      # - name: Terraform Apply
+      #   run: terraform apply -auto-approve
+      #   env:
+      #     GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
