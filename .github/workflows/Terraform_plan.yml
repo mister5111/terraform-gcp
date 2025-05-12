@@ -23,17 +23,20 @@ jobs:
       - name: Terraform Init
         working-directory: ${{ env.WORK_DIR }}
         run: |
+          pwd
+          ls -la
+          echo "WORK_DIR: ${{ env.WORK_DIR }}"
           terraform init
           terraform validate
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
-      - name: Terraform Plan
-        working-directory: ${{ env.WORK_DIR }}
-        run: |
-          terraform plan
-        env:
-          GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+      # - name: Terraform Plan
+      #   working-directory: ${{ env.WORK_DIR }}
+      #   run: |
+      #     terraform plan
+      #   env:
+      #     GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
       # - name: Terraform Init
       #   run: terraform init
 
