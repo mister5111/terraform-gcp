@@ -1,11 +1,11 @@
-name: terraform-plan
+name: terraform
 
 on: 
   workflow_dispatch:
 
 jobs:
   terraform-plan:
-    name: Terraform Workflow
+    name: Terraform Plan
     runs-on: ubuntu-latest
     env:
       WORK_DIR: ./GCP/main/
@@ -33,7 +33,7 @@ jobs:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
   terraform-apply:
-    name: terraform apply
+    name: Terraform Apply
     runs-on: ubuntu-latest
     env:
       WORK_DIR: ./GCP/main/
