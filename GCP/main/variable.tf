@@ -61,7 +61,7 @@ variable "zone_list_europe" {
 variable "zone_name_map_europe" {
         type = map(string)
         default = {
-            ghost1 =  "europe-west4-a"
+        #     ghost1 =  "europe-west4-a"
         #     ghost2 =  "europe-west4-a"
         #     ghost3 =  "europe-west4-a"
         #     ghost4 =  "europe-west4-a"
