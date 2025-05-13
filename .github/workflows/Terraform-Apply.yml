@@ -19,11 +19,9 @@ jobs:
 
       - name: Terraform Init
         working-directory: ${{ env.WORK_DIR }}
-        run: |
-          terraform init
-    #       terraform validate
-    #     env:
-    #       GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+        run: terraform init
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
       - name: Terraform Apply
         working-directory: ${{ env.WORK_DIR }}
