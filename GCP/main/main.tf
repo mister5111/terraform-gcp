@@ -21,7 +21,7 @@ module "europe-west3" {
   source                = "../modules/europe-west3"
   company               = var.Company 
   internal_cidr         = var.Private_subnet
-  network_global        = module.global.out_global_firewall_name
+  network_global        = module.global.global_firewall_name
   env                   = var.Env
   zone_names            = var.zone_map_europe-west3
   type_names            = var.type_map_europe-west3
@@ -30,7 +30,7 @@ module "europe-west3" {
 module "europe" {
   source                = "../modules/europe"
   internal_cidr         = var.Private_subnet
-  network_global        = module.global.out_global_firewall_name
+  network_global        = module.global.global_firewall_name
   env                   = var.Env
   zone_names            = var.zone_list_europe
   zone_and_name         = var.zone_name_map_europe
@@ -42,13 +42,28 @@ module "k8s_api_service" {
   source                = "../modules/k8s/api-service"
   company               = var.Company 
   internal_cidr         = var.Private_subnet_k8s
-  network_global        = module.global.out_global_firewall_name
+  network_global        = module.global.global_firewall_name
   env                   = var.Env
   zone_names            = var.zone_list_europe
   type_machine          = var.machine_type_list_europe
   project               = var.Project
 }
 ### k8s_api_service ###
+
+### PostgreSQL ###
+module "PostgreSQL" {
+  source                = "../modules/cloud-sql/postgreSQL"
+  # company               = var.Company 
+  # internal_cidr         = var.Private_subnet_k8s
+  # network_global        = module.global.global_firewall_name
+  env                   = var.Env
+  zone_names            = var.zone_list_europe
+  # type_machine          = var.machine_type_list_europe
+  # project               = var.Project
+}
+### PostgreSQL ###
+
+
 
 
 output "global" {
@@ -65,4 +80,8 @@ output "europe_module_outputs" {
 
 output "k8s_api_service" {
   value = module.k8s_api_service
+}
+
+output "PostgreSQL" {
+  value = module.PostgreSQL
 }
