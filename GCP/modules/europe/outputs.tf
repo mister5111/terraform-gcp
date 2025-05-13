@@ -6,8 +6,8 @@ output "instance_names-europe_docker-builder" {
   ]
 }
 
-output "instance_names-europe_test" {
-  value = [for i in google_compute_instance.test : {
+output "instance_names-europe_ghost" {
+  value = [for i in google_compute_instance.ghost : {
     name =  i.name
     ip = i.network_interface[0].access_config[0].nat_ip
     }
