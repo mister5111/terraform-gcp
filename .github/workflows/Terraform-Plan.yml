@@ -20,6 +20,7 @@ jobs:
       - name: Terraform Init
         working-directory: ${{ env.WORK_DIR }}
         run: |
+          terraform -v
           terraform init
           terraform validate
         env:
@@ -27,34 +28,6 @@ jobs:
 
       - name: Terraform Plan
         working-directory: ${{ env.WORK_DIR }}
-        run: |
-          terraform plan
+        run: terraform plan
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
-
-  # terraform-apply:
-  #   name: Terraform Apply
-  #   runs-on: ubuntu-latest
-  #   env:
-  #     WORK_DIR: ./GCP/main/
-
-  #   steps:
-  #   #   - name: Checkout repository
-  #   #     uses: actions/checkout@v3
-
-  #   #   - name: Set up Terraform
-  #   #     uses: hashicorp/setup-terraform@v3
-
-  #   #   - name: Terraform Init
-  #   #     working-directory: ${{ env.WORK_DIR }}
-  #   #     run: |
-  #   #       terraform init
-  #   #       terraform validate
-  #   #     env:
-  #   #       GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
-
-  #     - name: Terraform Apply
-  #       working-directory: ${{ env.WORK_DIR }}
-  #       run: terraform apply -auto-approve
-  #       env:
-  #         GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
