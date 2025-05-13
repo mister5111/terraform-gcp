@@ -1,5 +1,5 @@
-output "instance_names-europe_docker-builder" {
-  value = [for i in google_compute_instance.docker-builder : {
+output "instance_names-europe_docker" {
+  value = [for i in google_compute_instance.docker : {
     name =  i.name
     ip = i.network_interface[0].access_config[0].nat_ip
     }
