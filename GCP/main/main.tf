@@ -53,13 +53,8 @@ module "k8s_api_service" {
 ### PostgreSQL ###
 module "PostgreSQL" {
   source                = "../modules/cloud-sql/postgreSQL"
-  # company               = var.Company 
-  # internal_cidr         = var.Private_subnet_k8s
-  # network_global        = module.global.global_firewall_name
   env                   = var.Env
   zone_names            = var.zone_list_europe
-  # type_machine          = var.machine_type_list_europe
-  # project               = var.Project
 }
 ### PostgreSQL ###
 
