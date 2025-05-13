@@ -29,7 +29,6 @@ module "europe-west3" {
 
 module "europe" {
   source                = "../modules/europe"
-  company               = var.Company 
   internal_cidr         = var.Private_subnet
   network_global        = module.global.out_global_firewall_name
   env                   = var.Env
