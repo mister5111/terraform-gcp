@@ -20,7 +20,7 @@ resource "google_sql_database_instance" "postgres_instance" {
     }
 
     location_preference {
-      zone = format("%s-a",google_sql_database_instance.postgres_instance.region)
+      zone = format("%s-a", var.zone_names[1])
     }
   }
 }
