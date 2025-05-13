@@ -1,11 +1,11 @@
-name: terraform-plan-europe
+name: terraform-plan
 
 on: 
   workflow_dispatch:
 
 jobs:
   terraform-plan:
-    name: terraform-plan-europe
+    name: terraform-plan
     runs-on: ubuntu-latest
     env:
       WORK_DIR: ./GCP/main/
@@ -33,7 +33,7 @@ jobs:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
   terraform-apply:
-    name: terraform-apply-europe
+    name: terraform-apply
     runs-on: ubuntu-latest
     env:
       WORK_DIR: ./GCP/main/
