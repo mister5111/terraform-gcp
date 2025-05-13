@@ -30,7 +30,7 @@ resource "google_compute_instance" "docker-builder" {
   }
 }
 
-resource "google_compute_instance" "test" {
+resource "google_compute_instance" "ghost" {
   for_each      = var.zone_and_name
   name          = format("%s-%s-instance-%s-%s", var.company, var.env, each.key, var.type_machine[2])
   machine_type  = var.type_machine[2]
