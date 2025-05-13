@@ -83,5 +83,6 @@ output "k8s_api_service" {
 }
 
 output "PostgreSQL" {
+  sensitive = true
   value = module.PostgreSQL
 }
