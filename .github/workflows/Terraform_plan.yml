@@ -1,11 +1,11 @@
-name: Terraform-plan
+name: terraform-plan-europe
 
 on: 
   workflow_dispatch:
 
 jobs:
-  terraform:
-    name: Terraform Workflow
+  terraform-plan:
+    name: terraform-plan-europe
     runs-on: ubuntu-latest
     env:
       WORK_DIR: ./GCP/main/
@@ -32,22 +32,29 @@ jobs:
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
-      # - name: Terraform Init
-      #   run: terraform init
+  terraform-apply:
+    name: terraform-apply-europe
+    runs-on: ubuntu-latest
+    env:
+      WORK_DIR: ./GCP/main/
 
-      # - name: Terraform Format Check
-      #   run: terraform fmt -check
+    steps:
+    #   - name: Checkout repository
+    #     uses: actions/checkout@v3
 
-      # - name: Terraform Validate
-      #   run: terraform validate
+    #   - name: Set up Terraform
+    #     uses: hashicorp/setup-terraform@v3
 
-      # - name: Terraform Plan
-      #   run: terraform plan
-      #   env:
-      #     GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+    #   - name: Terraform Init
+    #     working-directory: ${{ env.WORK_DIR }}
+    #     run: |
+    #       terraform init
+    #       terraform validate
+    #     env:
+    #       GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
-      # Раскомментируй если хочешь автоматически применять:
-      # - name: Terraform Apply
-      #   run: terraform apply -auto-approve
-      #   env:
-      #     GOOGLE_CREDENTIALS: ${{ secrets.GCP_CREDENTIALS }}
+      - name: Terraform Apply
+        working-directory: ${{ env.WORK_DIR }}
+        run: terraform apply -auto-approve
+        env:
+          GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
