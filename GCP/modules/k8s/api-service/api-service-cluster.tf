@@ -29,21 +29,16 @@ data "google_container_cluster" "api_service" {
   location = google_container_cluster.api_service.location
 }
 
-
-# provider "kubernetes" {
-#   host                   = "https://${data.google_container_cluster.api_service.endpoint}"
-#   cluster_ca_certificate = base64decode(data.google_container_cluster.api_service.master_auth[0].cluster_ca_certificate)
-#   token                  = data.google_client_config.default.access_token
-# }
-
 provider "kubernetes" {
-  config_path = "~/.kube/config"
+  host                   = "https://${google_container_cluster.api_service.endpoint}"
+  cluster_ca_certificate = base64decode(google_container_cluster.api_service.master_auth[0].cluster_ca_certificate)
+  token                  = data.google_client_config.default.access_token
 }
+
 provider "helm" {
   kubernetes {
-    # host                   = "https://${data.google_container_cluster.api_service.endpoint}"
-    # cluster_ca_certificate = base64decode(data.google_container_cluster.api_service.master_auth[0].cluster_ca_certificate)
-    # token                  = data.google_client_config.default.access_token
-    config_path = "~/.kube/config"
+    host                   = "https://${google_container_cluster.api_service.endpoint}"
+    cluster_ca_certificate = base64decode(google_container_cluster.api_service.master_auth[0].cluster_ca_certificate)
+    token                  = data.google_client_config.default.access_token
   }
 }
