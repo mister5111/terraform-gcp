@@ -18,6 +18,6 @@ variable "zone_names" {
     type        = list(string)
 }
 
-variable "zone_and_name" {
+variable "name_and_zone" {
     type        = map(string)
 }

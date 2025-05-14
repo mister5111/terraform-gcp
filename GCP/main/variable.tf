@@ -24,21 +24,6 @@ variable "Private_subnet_k8s" {
         default = ["10.0.0.0/20"]
 }
 
-variable "zone_map_europe-west3" {
-        type = map(string)
-        default = {
-        #     vm1 =  "europe-west3-a"
-        #     vm2 =  "europe-west3-a"
-        #     vm3 =  "europe-west3-a"
-            vm4 =  "europe-west3-a"
-        }
-}
-
-variable "type_map_europe-west3" {
-        type = list(string)
-        default = ["e2-micro","e2-small","e2-medium"]
-}
-
 variable "zone_list_europe" {
         type = list(string)
         default = [
@@ -58,7 +43,7 @@ variable "zone_list_europe" {
                 ]
 }
 
-variable "zone_name_map_europe" {
+variable "name_zone_map_europe" {
         type = map(string)
         default = {
         #     ghost1 =  "europe-west4-a"

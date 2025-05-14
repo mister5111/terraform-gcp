@@ -26,7 +26,7 @@ resource "google_compute_instance" "docker" {
 }
 
 resource "google_compute_instance" "ghost" {
-  for_each      = var.zone_and_name
+  for_each      = var.name_and_zone
   name          = format("%s-%s-%s", var.env, each.key, var.type_machine[2])
   machine_type  = var.type_machine[2]
   zone          = each.value
