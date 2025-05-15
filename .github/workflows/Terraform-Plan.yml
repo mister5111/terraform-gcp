@@ -1,11 +1,11 @@
-name: Terraform-Plan
+name: Terraform-Plan-Dev
 
 on: 
   workflow_dispatch:
 
 jobs:
   terraform-plan:
-    name: Terraform Plan
+    name: Terraform Plan Dev
     runs-on: ubuntu-latest
     env:
       WORK_DIR: ./GCP/main/
@@ -17,7 +17,7 @@ jobs:
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v3
 
-      - name: Terraform Init
+      - name: Terraform Init Dev
         working-directory: ${{ env.WORK_DIR }}
         run: |
           terraform init
@@ -26,7 +26,7 @@ jobs:
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
-      - name: Terraform Plan
+      - name: Terraform Plan Dev
         working-directory: ${{ env.WORK_DIR }}
         run: |
           terraform workspace select dev  
