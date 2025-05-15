@@ -20,8 +20,8 @@ jobs:
       - name: Terraform Init Dev
         working-directory: ${{ env.WORK_DIR }}
         run: |
-          terraform workspace select dev
           terraform init
+          terraform workspace select dev
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
