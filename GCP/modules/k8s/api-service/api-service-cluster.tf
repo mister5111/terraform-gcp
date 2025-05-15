@@ -36,7 +36,7 @@ provider "kubernetes" {
   host                   = try("https://${google_container_cluster.api_service[0].endpoint}", "")
   cluster_ca_certificate = try(base64decode(google_container_cluster.api_service[0].master_auth[0].cluster_ca_certificate), "")
   token                  = try(data.google_client_config.default.access_token, "")
-  config_path = "~/.kube/config"
+  # config_path = "~/.kube/config"
 }
 
 provider "helm" {
@@ -44,6 +44,6 @@ provider "helm" {
     host                   = try("https://${google_container_cluster.api_service[0].endpoint}", "")
     cluster_ca_certificate = try(base64decode(google_container_cluster.api_service[0].master_auth[0].cluster_ca_certificate), "")
     token                  = try(data.google_client_config.default.access_token, "")
-    config_path = "~/.kube/config"
+    # config_path = "~/.kube/config"
   }
 }
