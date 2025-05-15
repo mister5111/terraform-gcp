@@ -1,11 +1,11 @@
 resource "google_compute_network" "global" {
-  name                    = format("%s-%s-global", var.company, var.env)
+  name                    = format("%s-global", var.env)
   auto_create_subnetworks = "false"
   routing_mode            = "GLOBAL"
 }
 
 resource "google_compute_firewall" "allow-internal" {
-  name    = format("%s-fw-allow-internal", var.company)
+  name    = format("%s-fw-allow-internal", var.env)
   network = google_compute_network.global.name
   allow {
     protocol = "icmp"
@@ -22,7 +22,7 @@ resource "google_compute_firewall" "allow-internal" {
 }
 
 resource "google_compute_firewall" "allow-http" {
-  name    = format("%s-fw-allow-http", var.company)
+  name    = format("%s-fw-allow-http", var.env)
   network = google_compute_network.global.name
   allow {
     protocol = "tcp"
@@ -34,7 +34,7 @@ resource "google_compute_firewall" "allow-http" {
 }
 
 resource "google_compute_firewall" "allow-https" {
-  name    = format("%s-fw-allow-https", var.company)
+  name    = format("%s-fw-allow-https", var.env)
   network = google_compute_network.global.name
   allow {
     protocol = "tcp"
@@ -46,7 +46,7 @@ resource "google_compute_firewall" "allow-https" {
 }
 
 resource "google_compute_firewall" "allow-icmp" {
-  name    = format("%s-fw-allow-icmp", var.company)
+  name    = format("%s-fw-allow-icmp", var.env)
   network = google_compute_network.global.name
   allow {
     protocol = "icmp"
@@ -57,7 +57,7 @@ resource "google_compute_firewall" "allow-icmp" {
 }
 
 resource "google_compute_firewall" "allow-ssh" {
-  name    = format("%s-fw-allow-ssh", var.company)
+  name    = format("%s-fw-allow-ssh", var.env)
   network = google_compute_network.global.name
   allow {
     protocol = "tcp"

@@ -1,7 +1,7 @@
 resource "google_compute_instance" "docker" {
-  count         =  0
+  count         =  var.counts ? 0 : 0
   name          = format("%s-%02d-docker", var.env, count.index + 1)
-  machine_type  = var.type_machine[2]
+  machine_type  = var.type_machine
   zone          = format("%s-a",var.zone_names[1])
   tags          = ["ssh","http","https","icmp"]
   boot_disk  {
@@ -27,8 +27,8 @@ resource "google_compute_instance" "docker" {
 
 resource "google_compute_instance" "ghost" {
   for_each      = var.name_and_zone
-  name          = format("%s-%s-%s", var.env, each.key, var.type_machine[2])
-  machine_type  = var.type_machine[2]
+  name          = format("%s-%s-%s", var.env, each.key, var.type_machine)
+  machine_type  = var.type_machine
   zone          = each.value
   tags          = ["ssh","http","https","icmp"]
   boot_disk  {

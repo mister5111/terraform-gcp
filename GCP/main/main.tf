@@ -1,5 +1,5 @@
 provider "google" {
-  project = var.Project
+  project = var.project
 }
 
 terraform {
@@ -11,36 +11,36 @@ terraform {
 
 module "global" {
   source            = "../modules/global" 
-  env               = var.Env
-  company           = var.Company
-  external_cidr     = var.Public_subnet
-  internal_cidr     = var.Private_subnet
+  env               = "${terraform.workspace}"
+  external_cidr     = var.public_subnet
+  internal_cidr     = var.private_subnet
 }
 
 module "europe" {
   source                = "../modules/europe"
-  internal_cidr         = var.Private_subnet
+  internal_cidr         = var.private_subnet
   network_global        = module.global.global_firewall_name
-  env                   = var.Env
+  env                   = "${terraform.workspace}"
   zone_names            = var.zone_list_europe
-  name_and_zone         = var.name_zone_map_europe
-  type_machine          = var.machine_type_list_europe
+  name_and_zone         = local.create_instances_for_each
+  type_machine          = local.selected_machine_type
+  counts                = local.create_instances_count
 }
 
 module "k8s_api_service" {
   source                = "../modules/k8s/api-service"
-  company               = var.Company 
-  internal_cidr         = var.Private_subnet_k8s
+  internal_cidr         = var.private_subnet_k8s
   network_global        = module.global.global_firewall_name
-  env                   = var.Env
+  env                   = "${terraform.workspace}"
   zone_names            = var.zone_list_europe
   type_machine          = var.machine_type_list_europe
-  project               = var.Project
+  project               = var.project
+  counts                = local.create_k8s_count
 }
 
-module "PostgreSQL" {
+module "postgreSQL" {
   source                = "../modules/cloud-sql/postgreSQL"
-  env                   = var.Env
+  env                   = "${terraform.workspace}"
   zone_names            = var.zone_list_europe
 }
 
@@ -56,6 +56,6 @@ output "k8s_api_service" {
   value = module.k8s_api_service
 }
 
-output "PostgreSQL" {
-  value = module.PostgreSQL
+output "postgreSQL" {
+  value = module.postgreSQL
 }

@@ -2,6 +2,10 @@ variable "env" {
   type        = string
 }
 
+variable "counts" {
+  type        = string
+}
+
 variable "internal_cidr" {
   type        = list(string)
 }
@@ -11,9 +15,8 @@ variable "network_global" {
 }
 
 variable "type_machine" {
-    type        = list(string)
+    type        = string
 }
-
 variable "zone_names" {
     type        = list(string)
 }

@@ -6,7 +6,7 @@ variable "project" {
   type        = string
 }
 
-variable "company" {
+variable "counts" {
   type        = string
 }
 
