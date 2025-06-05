@@ -24,3 +24,7 @@ variable "zone_names" {
 variable "name_and_zone" {
     type        = map(string)
 }
+
+variable "s_info" {
+    type = tuple([string, string, bool])
+}

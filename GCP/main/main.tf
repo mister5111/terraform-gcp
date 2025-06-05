@@ -4,7 +4,7 @@ provider "google" {
 
 terraform {
   backend "gcs" {
-    bucket = "kodi-terraform-state-bucket"
+    bucket = "kodi-terraform-state-20250604"
     prefix = "terraform/state"
   }
 }
@@ -25,6 +25,8 @@ module "europe" {
   name_and_zone  = local.create_instances_for_each
   type_machine   = local.selected_machine_type
   counts         = local.create_instances_count
+  s_info         = var.server_info
+
 }
 
 module "k8s_api_service" {

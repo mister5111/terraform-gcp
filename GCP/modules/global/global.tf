@@ -33,6 +33,18 @@ resource "google_compute_firewall" "allow-http" {
   source_ranges = [var.external_cidr]
 }
 
+resource "google_compute_firewall" "allow-custom-port" {
+  name    = format("%s-fw-allow-custom-port", var.env)
+  network = google_compute_network.global.name
+  allow {
+    protocol = "tcp"
+    ports    = ["27628"]
+  }
+  target_tags = ["custom-ssh"] 
+
+  source_ranges = [var.external_cidr]
+}
+
 resource "google_compute_firewall" "allow-https" {
   name    = format("%s-fw-allow-https", var.env)
   network = google_compute_network.global.name

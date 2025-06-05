@@ -1,5 +1,5 @@
 variable "project" {
-  default = "k8s-kodi-cluster"
+  default = "kodi-project-461909"
 }
 
 locals {
@@ -15,10 +15,17 @@ locals {
 locals {
   # VM create in dev and prod
   create_instances_for_each = terraform.workspace == "dev" ? {
-    #     ghost1 = "europe-west4-a"
-    #     ghost2 = "europe-west4-a"
-    #     ghost3 = "europe-west4-a"
-    #     ghost4 = "europe-west4-a"
+    # ghost1 = "europe-west4-a"
+    # ghost2 = "europe-west4-a"
+    # ghost3 = "europe-west4-a"
+    # ghost4 = "europe-west4-a"
+    # ghost5 = "europe-west4-a"
+    # ghost6 = "europe-west4-a"
+    # ghost7 = "europe-west4-a"
+    # ghost9 = "europe-west4-a"
+    # kodi-test = "europe-west1-b"
+    hugo-devops = "europe-west1-b"
+    # cv          = "us-central1-a"
     } : terraform.workspace == "prod" ? {
     #     ghost1 = "europe-west4-a"
     #     ghost2 = "europe-west4-a"
@@ -37,7 +44,8 @@ variable "private_subnet" {
     "172.16.1.0/24",
     "172.16.2.0/24",
     "172.16.3.0/24",
-    "172.16.4.0/24"
+    "172.16.4.0/24",
+    "172.16.5.0/24"
   ]
 }
 
@@ -77,9 +85,14 @@ variable "machine_type_list_europe" {
 
 locals {
   machine_type_map = {
-    dev  = var.machine_type_list_europe[0]
+    dev  = var.machine_type_list_europe[2]
     prod = var.machine_type_list_europe[2]
   }
-
   selected_machine_type = lookup(local.machine_type_map, terraform.workspace, var.machine_type_list_europe[1])
+}
+
+
+variable "server_info" {
+  type    = tuple([string, string, bool])
+  default = ["vm-server", "debian-cloud/debian-12", true]
 }
